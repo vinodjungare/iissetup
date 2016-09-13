@@ -49,4 +49,22 @@ dism { 'IIS-WebServer' :
   all    => true,
 }
 
+iis::manage_app_pool {'skillbuilder_pool':
+    enable_32_bit           => true,
+    managed_runtime_version => 'v4.0',
+  }
+   iis::manage_site {'www.puppetskill.net':
+    site_path     => 'C:\inetpub\wwwroot\puppetskill',
+    port          => '80',
+    ip_address    => '*',
+    host_header   => 'www.puppetskill.net',
+    app_pool      => 'skillbuilder_pool'
+  }
+   iis::manage_virtual_application {'static_page_app':
+    site_name   => 'www.puppetskill.net',
+    site_path   => 'C:\inetpub\wwwroot\static_page_app',
+    app_pool    => 'skillbuilder_pool'
+  }
+
+
 }
