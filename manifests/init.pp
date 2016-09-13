@@ -44,5 +44,9 @@
 #
 class iissetup {
 
+dism { 'IIS-WebServer' :
+  ensure => present,
+  all    => true,
+}
 
 }
